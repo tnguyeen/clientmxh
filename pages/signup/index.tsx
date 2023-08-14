@@ -57,7 +57,7 @@ export default function Login() {
               className={styles.inputgiday}
               required
               minLength={4}
-              maxLength={8}
+              maxLength={20}
               pattern="[A-Za-z0-9]+"
             />
           </div>
@@ -73,7 +73,7 @@ export default function Login() {
               className={styles.inputgiday}
               required
               minLength={4}
-              maxLength={8}
+              maxLength={10}
               pattern="[A-Za-z0-9]+"
             />
           </div>
@@ -94,7 +94,7 @@ export default function Login() {
               ref={inputPic}
               onChange={changeHandler}
               name="profilepic"
-              style={{ display: "none" }}
+              // style={{ display: "none" }}
             />
           </div>
 
