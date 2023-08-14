@@ -1,0 +1,36 @@
+.wrapper {
+  height: 46px;
+  width: 100%;
+  margin: 4px 0;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(230, 230, 230);
+    .icon {
+      transform: scale(1.1);
+    }
+  }
+
+  .icon {
+    scale: 1.5;
+    transition: ease 0.2s;
+  }
+}
+.bigSidebar {
+  padding: 12px;
+  .icon {
+    margin-right: 24px;
+  }
+  span {
+    transition: ease 0.2s;
+    margin-left: 10px;
+  }
+}
+.smallSidebar {
+  justify-content: center;
+  width: 46px;
+  align-items: center;
+}

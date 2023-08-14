@@ -1,0 +1,99 @@
+.post {
+  border: 1px solid #dbdbdb;
+  margin-bottom: 30px;
+  width: 470px;
+
+  .postHeader {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+
+    .postAvatar {
+      border-radius: 50%;
+      margin-right: 14px;
+      height: 30px;
+      width: 30px;
+    }
+
+    .postUsername {
+      font-weight: 600;
+    }
+  }
+
+  .postImage {
+    width: 100%;
+    .postImageCon {
+      height: auto;
+    }
+  }
+
+  .postActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+    .postLeftActions {
+      display: flex;
+      align-items: center;
+    }
+
+    .postRightActions {
+      display: flex;
+      align-items: center;
+    }
+
+    .postAction {
+      background-color: transparent;
+      border: none;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  }
+  .postLikes {
+    margin-left: 10px;
+    // margin-top: 4px;
+    font-weight: 600;
+  }
+  .postCaption {
+    padding: 4px 10px;
+    border-bottom: 1px solid #dbdbdb;
+  }
+  .postComment {
+    padding: 0 10px;
+  }
+  .cmtSec {
+    display: flex;
+    width: 100%;
+    height: 60px;
+    padding: 10px;
+    justify-content: space-between;
+    input {
+      flex: auto;
+      // margin: 0 6px;
+      border-radius: 6px;
+      border: 0;
+      font-size: 16px;
+      background-color: transparent;
+      padding: 10px 10px 10px 10px;
+      &:focus {
+        outline: 0;
+      }
+    }
+    button {
+      border: 0;
+      cursor: pointer;
+      border-radius: 5px;
+      color: rgb(0, 76, 255);
+      background-color: transparent;
+      transition: ease 0.4s;
+      &:hover {
+        color: rgb(60, 119, 255);
+      }
+    }
+  }
+  .postActionIcon {
+    height: 24px;
+    width: 24px;
+  }
+}
