@@ -1,34 +1,35 @@
-import { useDispatch, useSelector } from "react-redux";
-import styles from "./CreateBox.module.scss";
-import { ChangeEvent, useRef, useState } from "react";
-import axios from "axios";
-import api from "@/api";
+import { useSelector } from "react-redux"
+import styles from "./CreateBox.module.scss"
+import { ChangeEvent, useRef, useState } from "react"
+import axios from "axios"
+import api from "@/api"
+import Router from "next/router"
 
 function CreateBox() {
-  const [postPhoto, setPostPhoto] = useState<any>();
-  const inputPic = useRef<HTMLInputElement>(null);
-  const submitBtn = useRef<HTMLButtonElement>(null);
-  const inputCaption = useRef<HTMLInputElement>(null);
-  const [inputCaptionValue, setInputCaptionValue] = useState<string>("");
+  const [postPhoto, setPostPhoto] = useState<any>()
+  const inputPic = useRef<HTMLInputElement>(null)
+  const submitBtn = useRef<HTMLButtonElement>(null)
+  const inputCaption = useRef<HTMLInputElement>(null)
+  const [inputCaptionValue, setInputCaptionValue] = useState<string>("")
 
-  const { _id } = useSelector((state: any) => state.user);
-  const token = useSelector((state: any) => state.token);
+  const { _id } = useSelector((state: any) => state.user)
+  const token = useSelector((state: any) => state.token)
 
   const changePhotoHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setPostPhoto(inputPic.current?.files![0]);
-  };
+    setPostPhoto(inputPic.current?.files![0])
+  }
   const changeCaptionHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputCaptionValue(inputCaption.current?.value!);
-  };
+    setInputCaptionValue(inputCaption.current?.value!)
+  }
 
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formURL = `${api}/post/create`;
+    e.preventDefault()
+    const formURL = `${api}/post/create`
 
-    const fd = new FormData();
-    fd.append("userId", _id);
-    fd.append("caption", inputCaptionValue);
-    fd.append("postPhoto", postPhoto);
+    const fd = new FormData()
+    fd.append("userId", _id)
+    fd.append("caption", inputCaptionValue)
+    fd.append("postPhoto", postPhoto)
 
     axios
       .post(formURL, fd, {
@@ -38,8 +39,8 @@ function CreateBox() {
         },
       })
       .then((res) => window.alert("dang bai thanh cong, yeah"))
-      .catch((err) => window.alert("dang bai that bai, oh no"));
-  };
+      .catch((err) => window.alert("dang bai that bai, oh no"))
+  }
 
   return (
     <>
@@ -50,7 +51,8 @@ function CreateBox() {
           {postPhoto && inputCaptionValue && (
             <button
               onClick={() => {
-                submitBtn.current?.click();
+                submitBtn.current?.click()
+                Router.push("/")
               }}
             >
               Share
@@ -79,7 +81,7 @@ function CreateBox() {
             </form>
             <button
               onClick={() => {
-                inputPic.current?.click();
+                inputPic.current?.click()
               }}
             >
               Select from computer
@@ -101,7 +103,7 @@ function CreateBox() {
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export default CreateBox;
+export default CreateBox

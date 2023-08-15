@@ -8,6 +8,7 @@ import styles from "./SearchBox.module.scss"
 import { useEffect, useRef, useState } from "react"
 import axios from "axios"
 import Link from "next/link"
+import Image from "next/image"
 import api from "@/api"
 
 enum inputStatus {
@@ -110,9 +111,16 @@ function SearchBox() {
             {names.map((name, index) => (
               <Link
                 key={index}
-                href={`http://localhost:3000/user/${name.username}`}
+                href={`/user/${name.username}`}
               >
                 <div className={styles.result}>
+                  <Image
+                    src={`https://firebasestorage.googleapis.com/v0/b/winged-ray-395216.appspot.com/o/${name.profilePic}?alt=media&token=c08a1c39-fc6f-47c5-bb71-3fbede5ba081`}
+                    alt="ava"
+                    width={40}
+                    height={40}
+                    className={styles.resultImg}
+                  />
                   <p>{name.username.toString()}</p>
                 </div>
               </Link>

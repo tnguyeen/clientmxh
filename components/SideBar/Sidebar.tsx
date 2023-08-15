@@ -1,12 +1,12 @@
-import Image from "next/image";
-import Link from "next/link";
-import { useOnClickOutside, useToggle, useWindowSize } from "usehooks-ts";
-import { useEffect, useRef, useState } from "react";
+import Image from "next/image"
+import Link from "next/link"
+import { useOnClickOutside, useToggle, useWindowSize } from "usehooks-ts"
+import { useEffect, useRef, useState } from "react"
 
-import Datten, { DatTenProps } from "./datten/Datten";
-import SearchBox from "./SearchBox/SearchBox";
-import BigLogo from "./datten/Instagram_Logo_2016.svg";
-import MiniLogo from "./datten/instagram-seeklogo.com.svg";
+import Datten, { DatTenProps } from "./datten/Datten"
+import SearchBox from "./SearchBox/SearchBox"
+import BigLogo from "./datten/Instagram_Logo_2016.svg"
+import MiniLogo from "./datten/instagram-seeklogo.com.svg"
 import {
   faSearch,
   faHome,
@@ -14,74 +14,77 @@ import {
   faPlus,
   faUser,
   faBars,
-} from "@fortawesome/free-solid-svg-icons";
+} from "@fortawesome/free-solid-svg-icons"
 // import { IconProp } from "@fortawesome/fontawesome-svg-core"
 
-import styles from "./Sidebar.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { setLogout } from "@/state";
-import CreateBox from "./CreateBox/CreateBox";
+import styles from "./Sidebar.module.scss"
+import { useDispatch, useSelector } from "react-redux"
+import { setLogout } from "@/state"
+import CreateBox from "./CreateBox/CreateBox"
 
 function Sidebar() {
-  const user = Boolean(useSelector((state: any) => state.token));
-  const [activeSearch, toggleActiveSearch, setActiveSearch] = useToggle(false);
-  const [activeCreate, toggleActiveCreate, setActiveCreate] = useToggle(false);
-  const [activeOption, toggleActiveOption, setActiveOption] = useToggle();
-  const { width } = useWindowSize();
-  const [bigSidebar, setBigSidebar] = useState(!activeSearch && width > 1260);
-  const sidebar = useRef(null);
-  const optionsbox = useRef(null);
-  const createBox = useRef(null);
+  const user = Boolean(useSelector((state: any) => state.token))
+  const [activeSearch, toggleActiveSearch, setActiveSearch] = useToggle(false)
+  const [activeCreate, toggleActiveCreate, setActiveCreate] = useToggle(false)
+  const [activeOption, toggleActiveOption, setActiveOption] = useToggle()
+  const { width } = useWindowSize()
+  const [bigSidebar, setBigSidebar] = useState(!activeSearch && width > 1260)
+  const sidebar = useRef(null)
+  const optionsbox = useRef(null)
+  const createBox = useRef(null)
   const userCur = useSelector((state: any) => state.user)
 
-
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const arr1: Array<DatTenProps> = [
     { icon: faHome, name: "Home", to: "/" },
     { icon: faSearch, name: "Search", button: handleSearchClick },
-    { icon: faMessage, name: "Messages", to: "/direct" },
     { icon: faPlus, name: "Create", button: handleCreateClick },
-    { icon: faUser, name: "Profile", to:(userCur &&`/user/${userCur.username}`) },
-  ];
+    { icon: faMessage, name: "Messages", to: "/direct" },
+    {
+      icon: faUser,
+      name: "Profile",
+      to: userCur && `/user/${userCur.username}`,
+    },
+  ]
 
   function handleClickButton(): void {
-    setActiveSearch(false);
+    setActiveSearch(false)
   }
   function handleSearchClick(): void {
-    toggleActiveSearch();
+    toggleActiveSearch()
   }
   function handleCreateClick(): void {
-    toggleActiveCreate();
+    toggleActiveCreate()
   }
   function handleOptionsClick(): void {
-    toggleActiveOption();
+    toggleActiveOption()
   }
   function handleResize(): void {
-    setBigSidebar(!activeSearch && width > 1260);
+    setBigSidebar(!activeSearch && width > 1260)
   }
   function handleClickOutsideExpand(): void {
-    setActiveSearch(false);
+    setActiveSearch(false)
   }
   function handleClickOutsideCreateBox(): void {
-    setActiveCreate(false);
+    setActiveCreate(false)
   }
   function handleClickOutsideOptionBox(): void {
-    setActiveOption(false);
+    setActiveOption(false)
   }
   function logOut(): void {
-    dispatch(setLogout());
+    dispatch(setLogout())
   }
 
   useEffect(() => {
-    handleResize();
-  }, [width, activeSearch]);
+    handleResize()
+  }, [width, activeSearch])
 
-  useOnClickOutside(sidebar, handleClickOutsideExpand);
-  useOnClickOutside(optionsbox, handleClickOutsideOptionBox);
-  useOnClickOutside(createBox, handleClickOutsideCreateBox);
+  useOnClickOutside(sidebar, handleClickOutsideExpand)
+  useOnClickOutside(optionsbox, handleClickOutsideOptionBox)
+  useOnClickOutside(createBox, handleClickOutsideCreateBox)
   if (!user) {
-    return <></>;
+    return <></>
   }
 
   return (
@@ -123,7 +126,7 @@ function Sidebar() {
                   key={index}
                   button={e.button || handleClickButton}
                 />
-              );
+              )
             })}
           </div>
           <div className={styles.options} ref={optionsbox}>
@@ -159,7 +162,7 @@ function Sidebar() {
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export default Sidebar;
+export default Sidebar

@@ -47,16 +47,6 @@ export default function Home() {
     getPost()
   }, [user])
 
-  if (!user) {
-    return (
-      <>
-        <Head>
-          <title>Mxh</title>
-        </Head>
-        <Login />
-      </>
-    )
-  }
   if (posts.length === 0) return null
 
   return (

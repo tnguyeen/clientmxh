@@ -94,7 +94,7 @@ export default function Login() {
               ref={inputPic}
               onChange={changeHandler}
               name="profilepic"
-              // style={{ display: "none" }}
+              style={{ display: "none" }}
             />
           </div>
 

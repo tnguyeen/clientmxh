@@ -1,6 +1,8 @@
 import Sidebar from "../SideBar/Sidebar"
 import { ReactNode } from "react"
 import styles from "./Layout.module.scss"
+import Login from "@/pages/login"
+import { useSelector } from "react-redux"
 
 interface Props {
   children?: ReactNode
@@ -8,6 +10,15 @@ interface Props {
 }
 
 function Layout({ children }: Props) {
+  const user = Boolean(useSelector((state: any) => state.token))
+
+  if (!user) {
+    return (
+      <>
+        <Login />
+      </>
+    )
+  }
   return (
     <>
       <div className={styles.wrapper}>

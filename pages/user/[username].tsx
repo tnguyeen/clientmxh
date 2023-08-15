@@ -4,8 +4,10 @@ import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { useSelector } from "react-redux"
-import Post from "@/components/Post/Post"
+import UserPost from "./userPosts"
 import api from "@/api"
+
+import styles from "./User.module.scss"
 
 type UserModel = {
   _id: string
@@ -31,7 +33,6 @@ type PostModel = {
 function User() {
   const router = useRouter()
   const [user, setUser] = useState<UserModel>()
-  const [userPosts, setUserPosts] = useState<Array<PostModel>>()
   const userCur = useSelector((state: any) => state.user)
   const token = useSelector((state: any) => state.token)
 
@@ -76,36 +77,40 @@ function User() {
       <Head>
         <title>{router.query.username}</title>
       </Head>
-      <Image
-        src={`https://firebasestorage.googleapis.com/v0/b/winged-ray-395216.appspot.com/o/${user.profilePic}?alt=media&token=c08a1c39-fc6f-47c5-bb71-3fbede5ba081`}
-        alt="f"
-        width={200}
-        height={200}
-      />
-      <div>
-        <p>{user.username}</p>
-        <p>Followers:{user.followers.length}</p>
-        <p>Following:{user.following.length}</p>
+
+      <div className={styles.wrapper}>
+        <Image
+          src={`https://firebasestorage.googleapis.com/v0/b/winged-ray-395216.appspot.com/o/${user.profilePic}?alt=media&token=c08a1c39-fc6f-47c5-bb71-3fbede5ba081`}
+          alt="ava"
+          width={200}
+          height={200}
+        />
+        <div className={styles.idk}>
+          <div className={styles.info}>
+            <h2>{user.username}</h2>
+            <p>Followers : {user.followers.length}</p>
+            <p>Following : {user.following.length}</p>
+          </div>
+          <div className={styles.action}>
+            {userCur && !(user.username === userCur.username) ? (
+              <button onClick={followBtnClick}>
+                {user?.followers.includes(userCur._id) ? "Unfollow" : "Follow"}
+              </button>
+            ) : null}
+            {userCur && !(user.username === userCur.username) ? (
+              <button
+                onClick={() => {
+                  alert("Chua biet lam :))")
+                }}
+              >
+                Message
+              </button>
+            ) : null}
+          </div>
+        </div>
       </div>
 
-      {userCur && !(user.username === userCur.username) ? (
-        <button onClick={followBtnClick}>
-          {user?.followers.includes(userCur._id) ? "Unfollow" : "Follow"}
-        </button>
-      ) : null}
-      {userCur && !(user.username === userCur.username) ? (
-        <button onClick={()=>{alert('Chua biet lam :))')}}>Message</button>
-      ) : null}
-
-      {/* <div>
-        {userPosts?.map((e, index) => {
-          return (
-            <div key={index}>
-              <Post post={e} />;
-            </div>
-          )
-        })}
-      </div> */}
+      {user && <UserPost userId={user._id} />}
     </>
   )
 }
