@@ -2,6 +2,7 @@ import Sidebar from "../SideBar/Sidebar"
 import { ReactNode } from "react"
 import styles from "./Layout.module.scss"
 import Login from "@/pages/login"
+import Signup from "@/pages/signup"
 import { useSelector } from "react-redux"
 
 interface Props {
@@ -11,6 +12,13 @@ interface Props {
 
 function Layout({ children }: Props) {
   const user = Boolean(useSelector((state: any) => state.token))
+  if (children === <Signup />) {
+    return (
+      <>
+        <Signup />
+      </>
+    )
+  }
 
   if (!user) {
     return (

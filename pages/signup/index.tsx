@@ -3,9 +3,9 @@ import { FormEventHandler, useRef, useState } from "react"
 import axios from "axios"
 import Link from "next/link"
 import Head from "next/head"
-import api from '@/api'
+import api from "@/api"
 
-export default function Login() {
+export default function Signup() {
   const [usernameValue, setUsernameValue] = useState<string>("")
   const [passwordValue, setPasswordValue] = useState<string>("")
   const [profilePic, setProfilePic] = useState<any>()
@@ -40,9 +40,9 @@ export default function Login() {
 
   return (
     <>
-    <Head>
-          <title>Sign Up</title>
-        </Head>
+      <Head>
+        <title>Sign Up</title>
+      </Head>
       <div className={styles.wrapper}>
         <h1>Sign Up</h1>
         <form onSubmit={submitForm} encType="multipart/form-data" method="POST">
@@ -84,9 +84,7 @@ export default function Login() {
               Chọn đc 1 lần thôi, chọn r là k đổi đc (Nhưng mà phải chọn)
             </span>
             <br></br>
-            <span>
-            Cắt thành hình vuông nựa thì đẹp. T lười.
-            </span>
+            <span>Cắt thành hình vuông nựa thì đẹp. T lười.</span>
             <br />
             <input
               type="file"
@@ -109,7 +107,7 @@ export default function Login() {
           Upload
         </button>
 
-        <Link href="/" >Log in</Link>
+        <Link href="/">Log in</Link>
       </div>
     </>
   )
