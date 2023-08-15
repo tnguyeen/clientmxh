@@ -4,6 +4,7 @@ import styles from "./Layout.module.scss"
 import Login from "@/pages/login"
 import Signup from "@/pages/signup"
 import { useSelector } from "react-redux"
+import { useRouter } from "next/router"
 
 interface Props {
   children?: ReactNode
@@ -12,7 +13,9 @@ interface Props {
 
 function Layout({ children }: Props) {
   const user = Boolean(useSelector((state: any) => state.token))
-  if (children === <Signup />) {
+  const router = useRouter()
+
+  if (router.pathname === "/signup") {
     return (
       <>
         <Signup />
