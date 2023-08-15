@@ -4,6 +4,7 @@ import axios from "axios"
 import Link from "next/link"
 import Head from "next/head"
 import api from "@/api"
+import Router from "next/router"
 
 export default function Signup() {
   const [usernameValue, setUsernameValue] = useState<string>("")
@@ -34,7 +35,10 @@ export default function Signup() {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then((res) => window.alert("dang ki thanh cong, yeah"))
+      .then((res) => {
+        window.alert("dang ki thanh cong, yeah")
+        Router.push("/login")
+      })
       .catch((err) => window.alert("dang ki that bai, oh no"))
   }
 
