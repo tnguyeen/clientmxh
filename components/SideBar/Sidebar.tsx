@@ -74,6 +74,10 @@ function Sidebar() {
   }
   function logOut(): void {
     dispatch(setLogout())
+    setActiveOption(false)
+  }
+  function handleCreate(): void {
+    setActiveCreate(false)
   }
 
   useEffect(() => {
@@ -157,7 +161,7 @@ function Sidebar() {
           style={activeCreate ? { display: "block" } : {}}
         >
           <div className={styles.createBox} ref={createBox}>
-            <CreateBox />
+            <CreateBox activeCreate={handleCreate} />
           </div>
         </div>
       </div>

@@ -5,7 +5,11 @@ import axios from "axios"
 import api from "@/api"
 import Router from "next/router"
 
-function CreateBox() {
+interface CreateProps {
+  activeCreate: Function
+}
+
+function CreateBox({ activeCreate }: CreateProps) {
   const [postPhoto, setPostPhoto] = useState<any>()
   const inputPic = useRef<HTMLInputElement>(null)
   const submitBtn = useRef<HTMLButtonElement>(null)
@@ -21,7 +25,6 @@ function CreateBox() {
   const changeCaptionHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setInputCaptionValue(inputCaption.current?.value!)
   }
-
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const formURL = `${api}/post/create`
@@ -38,10 +41,13 @@ function CreateBox() {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then((res) => window.alert("dang bai thanh cong, yeah"))
+      .then((res) => {
+        activeCreate()
+        window.alert("dang bai thanh cong, yeah")
+        Router.push("/")
+      })
       .catch((err) => window.alert("dang bai that bai, oh no"))
   }
-
   return (
     <>
       <div className={styles.wrapper}>

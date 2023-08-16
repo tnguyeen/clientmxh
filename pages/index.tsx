@@ -38,15 +38,21 @@ export default function Home() {
           return Date.parse(b.createdAt) - Date.parse(a.createdAt)
         })
         dispatch(setPosts({ posts: sortPosts }))
-        // setPost(sortPosts);
       })
       .catch((err) => err)
   }
 
   useEffect(() => {
     getPost()
-  }, [user])
+  }, [token])
 
+  if (!user) {
+    return (
+      <>
+        <Login />
+      </>
+    )
+  }
   if (posts.length === 0) return null
 
   return (

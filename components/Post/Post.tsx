@@ -36,7 +36,7 @@ interface PostProps {
 }
 
 function Post({ post }: PostProps) {
-  const { _id } = useSelector((state: any) => state.user)
+  const { _id } = useSelector((state: any) => state.user) || "0"
   const token = useSelector((state: any) => state.token)
   const dispatch = useDispatch()
 
@@ -70,7 +70,9 @@ function Post({ post }: PostProps) {
           "Content-Type": "application/json",
         },
       })
-      .then((upd) => dispatch(setPost({ post: upd.data })))
+      .then((upd) => {
+        dispatch(setPost({ post: upd.data }))
+      })
       .catch((err) => err)
   }
 
@@ -119,7 +121,15 @@ function Post({ post }: PostProps) {
         </div>
         <div className={styles.postActions}>
           <div className={styles.postLeftActions}>
-            <button className={styles.postAction} onClick={likeBtn}>
+            <button
+              className={styles.postAction}
+              onClick={likeBtn}
+              style={
+                Array.isArray(post.likes) && post.likes.includes(_id)
+                  ? { color: "red" }
+                  : {}
+              }
+            >
               <FontAwesomeIcon
                 icon={faHeart}
                 className={styles.postActionIcon}

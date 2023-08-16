@@ -15,21 +15,6 @@ function Layout({ children }: Props) {
   const user = Boolean(useSelector((state: any) => state.token))
   const router = useRouter()
 
-  if (router.pathname === "/signup") {
-    return (
-      <>
-        <Signup />
-      </>
-    )
-  }
-
-  if (!user) {
-    return (
-      <>
-        <Login />
-      </>
-    )
-  }
   return (
     <>
       <div className={styles.wrapper}>
