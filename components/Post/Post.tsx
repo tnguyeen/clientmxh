@@ -136,7 +136,7 @@ function Post({ post }: PostProps) {
               />
             </button>
           </div>
-          {date}
+          {useCountdown(post.createdAt)}
         </div>
         <p className={styles.postLikes}>
           {post.likes.length}{" "}
@@ -175,6 +175,38 @@ function Post({ post }: PostProps) {
       </div>
     </>
   )
+}
+
+const useCountdown = (targetDate: string) => {
+  const countDownDate = new Date(targetDate).getTime()
+
+  const [countDown, setCountDown] = useState(
+    new Date().getTime() - countDownDate
+  )
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCountDown(new Date().getTime() - countDownDate)
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [countDownDate])
+
+  return getReturnValues(countDown)
+}
+
+const getReturnValues = (countDown: number) => {
+  // calculate time left
+  const days = Math.floor(countDown / (1000 * 60 * 60 * 24))
+  const hours = Math.floor(
+    (countDown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  )
+  const minutes = Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60))
+  const seconds = Math.floor((countDown % (1000 * 60)) / 1000)
+  if (days > 0) return days + " ngày trước"
+  if (hours > 0) return hours + " giờ trước"
+  if (minutes > 0) return minutes + " phút trước"
+  return "vài giây trước"
 }
 
 export default Post

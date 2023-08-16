@@ -53,7 +53,7 @@ export default function Home() {
       </>
     )
   }
-  if (posts.length === 0) return null
+  if (posts && posts.length === 0) return null
 
   return (
     <>

@@ -43,11 +43,11 @@ function CreateBox({ activeCreate }: CreateProps) {
       })
       .then((res) => {
         activeCreate()
-        window.alert("dang bai thanh cong, yeah")
         Router.push("/")
       })
       .catch((err) => window.alert("dang bai that bai, oh no"))
   }
+
   return (
     <>
       <div className={styles.wrapper}>
