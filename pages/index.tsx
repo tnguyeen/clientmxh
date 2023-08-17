@@ -2,7 +2,6 @@ import Head from "next/head"
 import Post from "../components/Post/Post"
 import { useDispatch, useSelector } from "react-redux"
 import Login from "./login"
-import Link from "next/link"
 import { useEffect } from "react"
 import axios from "axios"
 import { setPosts } from "@/state"
@@ -21,7 +20,7 @@ type PostModel = {
 }
 
 export default function Home() {
-  const user = Boolean(useSelector((state: any) => state.token))
+  const user = useSelector((state: any) => state.user)
   const dispatch = useDispatch()
   const posts = useSelector((state: any) => state.posts)
   const token = useSelector((state: any) => state.token)
@@ -44,31 +43,27 @@ export default function Home() {
 
   useEffect(() => {
     getPost()
-  }, [token])
+  }, [user])
 
   if (!user) {
-    return (
+    return <Login />
+  }
+  return (
+    posts && (
       <>
-        <Login />
+        <Head>
+          <title>Mxh</title>
+        </Head>
+        {Array.isArray(posts)
+          ? posts.map((element: any, index: any) => {
+              return (
+                <div key={index}>
+                  <Post post={element} />
+                </div>
+              )
+            })
+          : null}
       </>
     )
-  }
-  if (posts && posts.length === 0) return null
-
-  return (
-    <>
-      <Head>
-        <title>Mxh</title>
-      </Head>
-      {Array.isArray(posts)
-        ? posts.map((element: any, index: any) => {
-            return (
-              <div key={index}>
-                <Post post={element} />
-              </div>
-            )
-          })
-        : null}
-    </>
   )
 }

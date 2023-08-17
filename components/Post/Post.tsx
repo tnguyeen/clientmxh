@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react"
-import Image, { StaticImageData } from "next/image"
+import Image from "next/image"
 
 import styles from "./Post.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -43,7 +43,6 @@ function Post({ post }: PostProps) {
   const [cmtValue, setCmtValue] = useState<string>("")
   const input = useRef<HTMLInputElement>(null)
   const cmtButton = useRef<HTMLButtonElement>(null)
-  const date = new Date(post.createdAt).toDateString()
 
   const changeHandler = () => {
     setCmtValue(input.current?.value!)

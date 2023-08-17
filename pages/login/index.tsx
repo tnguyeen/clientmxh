@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux"
 import { setLogin } from "@/state"
 import Head from "next/head"
 import api from "@/api"
+import axios from "axios"
 
 export default function Login() {
   const [usernameValue, setUsernameValue] = useState<string>("")
@@ -26,26 +27,19 @@ export default function Login() {
       username: usernameValue,
       password: passwordValue,
     }
-
-    // POST the data to the URL of the form
-    const loggedInRes = await fetch(formURL, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    const loggedIn = await loggedInRes.json()
-    if (loggedIn) {
-      dispatch(
-        setLogin({
-          user: loggedIn.user,
-          token: loggedIn.token,
-        })
-      )
-      localStorage.setItem("user", loggedIn.user)
-      localStorage.setItem("token", loggedIn.token)
-    }
+    axios
+      .post(formURL, data)
+      .then((data) => {
+        dispatch(
+          setLogin({
+            user: data.data.user,
+            token: data.data.token,
+          })
+        )
+        localStorage.setItem("user", data.data.user)
+        localStorage.setItem("token", data.data.token)
+      })
+      .catch((err) => err)
   }
 
   return (

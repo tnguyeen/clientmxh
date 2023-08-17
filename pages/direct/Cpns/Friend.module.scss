@@ -1,0 +1,25 @@
+.friend {
+  display: flex;
+  align-items: center;
+  height: 80px;
+  &:hover {
+    cursor: pointer;
+  }
+  .friendAva {
+    margin: 0 10px;
+    border-radius: 50%;
+    padding: 2px;
+    border: 1px solid #dbdbdb;
+  }
+}
+
+@media only screen and (max-width: 1350px) {
+  .friend {
+    justify-content: center;
+    .friendAva {
+    }
+    p {
+      display: none;
+    }
+  }
+}
