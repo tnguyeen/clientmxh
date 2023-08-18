@@ -62,21 +62,24 @@ export default function Chat({ room, socket }: ChatProps) {
       })
       .catch((err) => err)
   }
+
   useEffect(() => {
     getChat()
+    socket.on("receive_message", (data) => {
+      setMessageList((list) => [...list, data])
+    })
     input.current?.addEventListener("keypress", function (event) {
       if (event.key === "Enter") {
         sendButton.current?.click()
       }
     })
-    socket.on("receive_message", (data) => {
-      setMessageList((list) => [...list, data])
-    })
-    scroll.current?.scrollIntoView({ behavior: "smooth" })
     return () => {
       socket.off("receive_message")
     }
-  }, [room, messageList])
+  }, [room])
+  useEffect(() => {
+    scroll.current?.scrollIntoView({ behavior: "smooth" })
+  }, [messageList])
 
   return (
     <>

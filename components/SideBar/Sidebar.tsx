@@ -21,6 +21,7 @@ import styles from "./Sidebar.module.scss"
 import { useDispatch, useSelector } from "react-redux"
 import { setLogout } from "@/state"
 import CreateBox from "./CreateBox/CreateBox"
+import Router from "next/router"
 
 function Sidebar() {
   const user = Boolean(useSelector((state: any) => state.token))
@@ -55,6 +56,7 @@ function Sidebar() {
     toggleActiveSearch()
   }
   function handleCreateClick(): void {
+    Router.push("/")
     toggleActiveCreate()
   }
   function handleOptionsClick(): void {

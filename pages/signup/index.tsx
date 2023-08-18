@@ -1,5 +1,5 @@
 import styles from "./Signup.module.scss"
-import { FormEventHandler, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import axios from "axios"
 import Link from "next/link"
 import Head from "next/head"
