@@ -80,6 +80,10 @@ export default function Login() {
         </form>
 
         <Link href="/signup">Sign Up</Link>
+        <br />
+        <br />
+        <br />
+        <h3>Đợi tí cho server phản hồi.</h3>
       </div>
     </>
   )
