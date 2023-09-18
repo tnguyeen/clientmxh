@@ -84,6 +84,15 @@ export default function Login() {
         <br />
         <br />
         <h3>Đợi tí cho server phản hồi.</h3>
+        <iframe
+          style={{ borderRadius: "12px", backgroundColor: "white" }}
+          src="https://open.spotify.com/embed/show/0e8fjEyOrXAotWQy31bkjF?utm_source=generator&theme=0"
+          width="600px"
+          height="152"
+          frameBorder="0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+        ></iframe>
       </div>
     </>
   )
